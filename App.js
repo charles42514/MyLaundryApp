@@ -2,21 +2,29 @@ import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import Home from './src/screens/Home';
-import Login from './src/screens/Login';
-import SignUp from './src/screens/SignUp';
-import UserDashboard from './src/screens/UserDashboard';
-import AdminDashboard from './src/screens/AdminDashboard';
-import ContactUs from './src/screens/ContactUs';
-import AboutUs from './src/screens/AboutUs';
-import Profile from './src/screens/Profile';
-import AdminProfile from './src/screens/AdminProfile';
 
+// Main Screens
+import Home from './src/screens/MainScreens/Home';
+import Login from './src/screens/MainScreens/Login';
+import SignUp from './src/screens/MainScreens/SignUp';
+import ContactUs from './src/screens/MainScreens/ContactUs';
+import AboutUs from './src/screens/MainScreens/AboutUs';
+
+// Service Provider Screens
+import ProviderProfile from './src/screens/ServiceProviderScreens/ProviderProfile';
+import OrderManagement from './src/screens/ServiceProviderScreens/OrderManagement';
+import Notifications from './src/screens/ServiceProviderScreens/Notifications';
+
+// Service Seeker Screens
+import SeekerProfile from './src/screens/ServiceSeekerScreens/SeekerProfile';
+import ServiceProviders from './src/screens/ServiceSeekerScreens/ServiceProviders';
+import Orders from './src/screens/ServiceSeekerScreens/Orders';
+import Notification from './src/screens/ServiceSeekerScreens/Notification';
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
-// Main Drawer Navigator for Home, About Us, and Contact Us
+// Main Drawer Navigator
 function MainDrawer() {
   return (
     <Drawer.Navigator initialRouteName="Home">
@@ -29,23 +37,29 @@ function MainDrawer() {
   );
 }
 
-
-function UserDrawer() {
+// Service Provider Drawer
+function ServiceProviderDrawer() {
   return (
-    <Drawer.Navigator initialRouteName="MyLaundryApp">
-      <Drawer.Screen name="UserDashboard" component={UserDashboard} />
-      <Drawer.Screen name="ContactUs" component={ContactUs} />
-      <Drawer.Screen name="AboutUs" component={AboutUs} />
+    <Drawer.Navigator initialRouteName="ProviderMenu">
+      <Drawer.Screen name="ProviderProfile" component={ProviderProfile} />
+      <Drawer.Screen name="OrderManagement" component={OrderManagement} />
+      <Drawer.Screen name="Notifications" component={Notifications} />
+      <Drawer.Screen name="About Us" component={AboutUs} />
+      <Drawer.Screen name="Contact Us" component={ContactUs} />
     </Drawer.Navigator>
   );
 }
 
-function AdminDrawer() {
+// Service Seeker Drawer
+function ServiceSeekerDrawer() {
   return (
-    <Drawer.Navigator initialRouteName="AdminDashboard">
-      <Drawer.Screen name="AdminDashboard" component={AdminDashboard} />
-      <Drawer.Screen name="ContactUs" component={ContactUs} />
-      <Drawer.Screen name="AboutUs" component={AboutUs} />
+    <Drawer.Navigator initialRouteName="SeekerMenu">
+      <Drawer.Screen name="SeekerProfile" component={SeekerProfile} />
+      <Drawer.Screen name="ServiceProviders" component={ServiceProviders} />
+      <Drawer.Screen name="Orders" component={Orders} />
+      <Drawer.Screen name="Notification" component={Notification} />
+      <Drawer.Screen name="About Us" component={AboutUs} />
+      <Drawer.Screen name="Contact Us" component={ContactUs} />
     </Drawer.Navigator>
   );
 }
@@ -70,23 +84,13 @@ export default function App() {
           options={{ headerTitle: 'Sign Up' }}
         />
         <Stack.Screen
-          name="UserDashboard"
-          component={UserDrawer}
+          name="SeekerDrawer"
+          component={ServiceSeekerDrawer}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="AdminDashboard"
-          component={AdminDrawer}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Profile"
-          component={Profile}
-          options={{ headerShown: false }}
-        />
-         <Stack.Screen
-          name="AdminProfile"
-          component={AdminProfile}
+          name="ProviderDrawer"
+          component={ServiceProviderDrawer}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

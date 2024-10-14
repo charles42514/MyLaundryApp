@@ -3,12 +3,22 @@ import { View, Text, Image, StyleSheet, Button, ScrollView, TouchableOpacity } f
 import { Card, Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const Profile = ({ navigation }) => {
+const SeekerProfile = ({ 
+  navigation, 
+  route = {} 
+}) => {
+  const { 
+    name = 'John Doe', 
+    email = 'john.doe@example.com', 
+    phone = '123-456-7890', 
+    address = '123 Main St, Anytown, USA' 
+  } = route.params || {}; // Default values
+
   const [editing, setEditing] = useState(false);
-  const [name, setName] = useState('John Doe');
-  const [email, setEmail] = useState('john.doe@example.com');
-  const [phone, setPhone] = useState('123-456-7890');
-  const [address, setAddress] = useState('123 Main St, Anytown, USA');
+  const [updatedName, setUpdatedName] = useState(name);
+  const [updatedEmail, setUpdatedEmail] = useState(email);
+  const [updatedPhone, setUpdatedPhone] = useState(phone);
+  const [updatedAddress, setUpdatedAddress] = useState(address);
 
   const handleLogout = () => {
     // Handle logout logic
@@ -26,7 +36,7 @@ const Profile = ({ navigation }) => {
           source={{ uri: 'https://via.placeholder.com/150' }}
           style={styles.profileImage}
         />
-        <Text style={styles.name}>{name}</Text>
+        <Text style={styles.name}>{updatedName}</Text>
         <Text style={styles.role}>Service Seeker</Text>
         <View style={styles.iconContainer}>
           <TouchableOpacity onPress={toggleEdit}>
@@ -45,34 +55,34 @@ const Profile = ({ navigation }) => {
           <>
             <Input
               label="Name"
-              value={name}
-              onChangeText={setName}
+              value={updatedName}
+              onChangeText={setUpdatedName}
               containerStyle={styles.input}
             />
             <Input
               label="Email"
-              value={email}
-              onChangeText={setEmail}
+              value={updatedEmail}
+              onChangeText={setUpdatedEmail}
               containerStyle={styles.input}
             />
             <Input
               label="Phone"
-              value={phone}
-              onChangeText={setPhone}
+              value={updatedPhone}
+              onChangeText={setUpdatedPhone}
               containerStyle={styles.input}
             />
             <Input
               label="Address"
-              value={address}
-              onChangeText={setAddress}
+              value={updatedAddress}
+              onChangeText={setUpdatedAddress}
               containerStyle={styles.input}
             />
           </>
         ) : (
           <>
-            <Text style={styles.info}>Email: {email}</Text>
-            <Text style={styles.info}>Phone: {phone}</Text>
-            <Text style={styles.info}>Address: {address}</Text>
+            <Text style={styles.info}>Email: {updatedEmail}</Text>
+            <Text style={styles.info}>Phone: {updatedPhone}</Text>
+            <Text style={styles.info}>Address: {updatedAddress}</Text>
           </>
         )}
         <Button
@@ -138,4 +148,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Profile;
+export default SeekerProfile;
